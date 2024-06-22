@@ -22,8 +22,15 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 ![server-mapping](https://github.com/tfcenter/tfcenter-service/assets/169414880/90baa548-0b8d-4005-9b9e-94c4c98ad9fb)
 这样可以通过服务器IP+映射端口号（如图172.245.137.103:10170）， 访问本地8866端口服务(127.0.0.1:8866)
 
-
 ### P2P穿透
+本文档不介绍具体搭建方式（详情可通过官网查看B站视频：https://www.bilibili.com/video/BV1Kx4y1H7go）
+具体有以下三种P2P建立隧道的方式：（依次尝试）
+ - 优先使用IPv6地址建立隧道（如有IPv6地址，则一定会建立隧道成功）
+ - 其次使用出口ipv4出口地址建议隧道（不同的NAT类型，有可能会建议失败）
+ - 最后使用跳板机中转P2P流量（一定会建立隧道成功）
+![tfcenter-搭建免费高速的P2P内网穿透](https://github.com/tfcenter/tfcenter-service/assets/169414880/0ea03e3e-0ca8-4d1e-ac4e-ea029f90014b)
+
+
 
 ### Webdav文件管理
 
