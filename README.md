@@ -16,6 +16,12 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 
 
 ### 服务器穿透
+(1) 选择服务器列表的任意可用服务器(官方提供部分免费服务器，也可自行搭建私人服务器)
+![server-list](https://github.com/tfcenter/tfcenter-service/assets/169414880/b2805b3c-4ace-43a9-ba1f-e97f12a71695)
+(2) 配置端口映射（支持tcp和udp协议）
+![server-mapping](https://github.com/tfcenter/tfcenter-service/assets/169414880/90baa548-0b8d-4005-9b9e-94c4c98ad9fb)
+这样可以通过服务器IP+映射端口号（如图172.245.137.103:10170）， 访问本地8866端口服务(127.0.0.1:8866)
+
 
 ### P2P穿透
 
