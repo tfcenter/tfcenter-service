@@ -1,8 +1,8 @@
 # tfcenter-service
 ## 软件简介
 tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、ubuntu18/20/22、windows7/10/11、ARM系统、树莓派等系统方案。
-可通过官方网站： http://www.tfcenter.com.cn 获取软件的更多信息。
-
+ - (1) 通过官方网站： http://www.tfcenter.com.cn 获取软件的更多信息。
+ - (2) 通过qq群(群号:599362559): https://qm.qq.com/q/aSTuXp9rig 获取软件的更多信息
 
 
 ## 软件特性
@@ -33,6 +33,10 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 
 
 ### Webdav文件管理
+![webdav-setting](https://github.com/tfcenter/tfcenter-service/assets/169414880/f72df2f0-8033-47a7-bbec-cdcdb7a550fb)
+
+
+
 
 ### Web文件管理
 
