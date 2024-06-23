@@ -46,6 +46,14 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 
 ![web-setting](https://github.com/tfcenter/tfcenter-service/assets/169414880/8220fdef-e60f-49d8-acff-1861f4c57307)
 
+(2) web浏览器管理对应的目录
+
+![web-dir](https://github.com/tfcenter/tfcenter-service/assets/169414880/5c347826-cf7c-4d16-9bf4-6bde35f00989)
+
+(3) 多人在线编辑excel表
+
+![web-excel](https://github.com/tfcenter/tfcenter-service/assets/169414880/41af07a2-e4de-4cb2-8a74-b61b605ed90b)
+
 
 
 ### 代理服务
