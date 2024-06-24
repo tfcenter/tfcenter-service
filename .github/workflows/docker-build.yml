@@ -3,7 +3,7 @@ name: Docker Build
 on:
   push:
     branches:
-      - main  # 设置触发条件，比如在 main 分支推送时触发
+      - main  # 设置触发条件， 比如在 main 分支推送时触发
 
 jobs:
   build:
