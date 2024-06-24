@@ -1,20 +1,17 @@
-# 使用官方的 Golang 镜像创建构建产物。
-FROM golang:1.21.3 AS builder
+# 使用官方提供的基础镜像
+FROM ubuntu:latest
 
-# 将本地代码复制到容器镜像中。
+# 设置工作目录
 WORKDIR /app
-COPY . .
 
-# 在容器内构建命令。
-RUN tar xvf v3.3.4/tfcenter-linux-v3.3.4.tar.gz
+# 将压缩包复制到容器中
+COPY v3.3.4/tfcenter-linux-v3.3.4.tar.gz /app/
 
-# 使用一个新的阶段创建一个最小的镜像。
-FROM alpine:3.14
-COPY --from=builder /app/my-app /usr/local/bin/my-app
-# 更新文件权限以确保它是可执行的。
-RUN chmod +x /usr/local/bin/my-app
-# 设置容器的默认端口
-EXPOSE 8081
+# 解压压缩包
+RUN tar -xzvf tfcenter-linux-v3.3.4.tar.gz
 
-# 设置容器的默认命令。
-CMD ["/usr/local/bin/my-app"]
+# 可选：清理工作目录，减少镜像大小
+RUN rm tfcenter-linux-v3.3.4.tar.gz
+
+# 定义容器启动时执行的命令（示例）
+CMD ["bash"]
