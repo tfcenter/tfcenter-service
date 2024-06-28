@@ -1,5 +1,5 @@
 # 使用官方提供的基础镜像
-FROM ubuntu:latest
+FROM alpine:latest
 
 # 设置工作目录
 WORKDIR /app
