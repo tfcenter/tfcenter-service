@@ -15,6 +15,14 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
   - **同步管理**（同步文件或文件夹）：可以通过tfcenter同步两台电脑中的文件或文件夹。
 
 
+## Docker容器安装
+### linux 64位系统
+  - （1）下载镜像： docker pull tfcenter:service
+  - （2）启动容器： docker run -it --name tfcenter --net=host --restart=always -v /home/tf-config:/tf-config  -d  docker.io/tfcenter/service:latest  /app/tfcenter-linux/tfcenter --config /tf-config
+  - 使用 http://ip:8866 访问tfcenter页面
+
+
+
 ### 服务器穿透
 (1) 选择服务器列表的任意可用服务器(官方提供部分免费服务器，也可自行搭建私人服务器)
 ![server-list](https://github.com/tfcenter/tfcenter-service/assets/169414880/b2805b3c-4ace-43a9-ba1f-e97f12a71695)
