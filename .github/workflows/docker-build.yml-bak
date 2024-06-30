@@ -9,22 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        platform:
-          - arch: amd64
-            dockerfile: Dockerfile.amd64
-            tag: latest-amd64
-          - arch: arm64
-            dockerfile: Dockerfile.arm64
-            tag: latest-arm64
-          - arch: 386
-            dockerfile: Dockerfile.386
-            tag: latest-386
-          - arch: arm/v7
-            dockerfile: Dockerfile.arm32
-            tag: latest-arm32
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -48,10 +32,34 @@ jobs:
         run: |
           docker buildx create --use
           
+          docker buildx build  --push \
+           --platform linux/amd64,linux/386 \
+           -t tfcenter/service:latest \
+           -f Dockerfile.amd64 .
+
+          # Build amd64
           docker buildx build --push \
-            --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7 \
-            -t tfcenter/service:latest \
-            -f ${{ matrix.platform.dockerfile }} .
+            --platform linux/amd64 \
+            -t tfcenter/service:latest-amd64 \
+            -f Dockerfile.amd64 .
+
+          # Build arm64
+          docker buildx build --push \
+            --platform linux/arm64 \
+            -t tfcenter/service:latest-arm64 \
+            -f Dockerfile.arm64 .
+
+          # Build 386
+          docker buildx build --push \
+            --platform linux/386 \
+            -t tfcenter/service:latest-386 \
+            -f Dockerfile.386 .
+
+          # Build arm/v7
+          docker buildx build --push \
+            --platform linux/arm/v7 \
+            -t tfcenter/service:latest-arm32 \
+            -f Dockerfile.arm32 .
 
       - name: Logout from Docker Hub
         run: docker logout
