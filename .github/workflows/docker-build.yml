@@ -46,8 +46,10 @@ jobs:
 
       - name: Build and push multi-architecture Docker images
         run: |
+          # Create and use a new instance of Docker Buildx
           docker buildx create --use
-          
+
+          # Build and push images for each platform
           docker buildx build --push \
             --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7 \
             -t tfcenter/service:latest \
