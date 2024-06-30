@@ -28,13 +28,28 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and push Docker images for multiple architectures
+      - name: Build and push multi-architecture Docker image
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64 -t tfcenter/service:latest --push -f Dockerfile.amd64 .
-          docker buildx build --platform linux/arm64 -t tfcenter/service:latest --push -f Dockerfile.arm64 .
-          docker buildx build --platform linux/386 -t tfcenter/service:latest --push -f Dockerfile.386 .
-          docker buildx build --platform linux/arm/v7 -t tfcenter/service:latest --push -f Dockerfile.arm32 .
+          docker buildx build --push \
+            --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7 \
+            -t tfcenter/service:latest \
+            -f Dockerfile.amd64 .
+          
+          docker buildx build --push \
+            --platform linux/arm64 \
+            -t tfcenter/service:latest \
+            -f Dockerfile.arm64 .
+
+          docker buildx build --push \
+            --platform linux/386 \
+            -t tfcenter/service:latest \
+            -f Dockerfile.386 .
+
+          docker buildx build --push \
+            --platform linux/arm/v7 \
+            -t tfcenter/service:latest \
+            -f Dockerfile.arm32 .
 
       - name: Logout from Docker Hub
         run: docker logout
