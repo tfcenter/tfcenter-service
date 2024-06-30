@@ -11,7 +11,11 @@ jobs:
 
     strategy:
       matrix:
-        platform: [amd64, arm64, 386, arm/v7]
+        platform:
+          - { arch: amd64, dockerfile: Dockerfile.amd64 }
+          - { arch: arm64, dockerfile: Dockerfile.arm64 }
+          - { arch: 386, dockerfile: Dockerfile.386 }
+          - { arch: arm/v7, dockerfile: Dockerfile.arm32 }
 
     steps:
       - name: Checkout code
@@ -20,7 +24,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64,amd64,386,arm/v7
+          platforms: arm64,amd64,386,arm
 
       - name: Set up Docker Buildx
         id: buildx
@@ -38,8 +42,8 @@ jobs:
           context: .
           push: true
           tags: tfcenter/service:latest
-          file: Dockerfile.${{ matrix.platform }}
-          platforms: linux/${{ matrix.platform }}
+          file: ${{ matrix.platform.dockerfile }}
+          platforms: linux/${{ matrix.platform.arch }}
 
       - name: Logout from Docker Hub
         run: docker logout
