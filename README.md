@@ -16,16 +16,23 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 
 
 ## Docker容器安装
-  ### 下载镜像
+  **(1) linux x86-64位**
   - docker pull tfcenter/service:latest-amd64
-  - docker pull tfcenter/service:latest-arm64
+  - docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest-amd64  /app/tfcenter/tfcenter --config /tfcenter-config
+    
+  **(2) linux x86-32位**
   - docker pull tfcenter/service:latest-386
+  - docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest-386  /app/tfcenter/tfcenter --config /tfcenter-config
+    
+  **(3) linux arm-64位**
+  - docker pull tfcenter/service:latest-arm64
+  - docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest-arm64  /app/tfcenter/tfcenter --config /tfcenter-config
+    
+  **(4)linux arm-32位**
   - docker pull tfcenter/service:latest-arm32
+  - docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest-arm32  /app/tfcenter/tfcenter --config /tfcenter-config
 
-  ### 启动容器
-  docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest  /app/tfcenter/tfcenter --config /tfcenter-config
-  
-  ### 使用 http://ip:8866 访问tfcenter页面
+  (使用 http://ip:8866 访问tfcenter页面)
 
 
 
