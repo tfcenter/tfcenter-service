@@ -28,26 +28,35 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and push multi-architecture Docker image
+      - name: Build and push multi-architecture Docker images
         run: |
           docker buildx create --use
+          
+          # Build amd64
           docker buildx build --push \
-            --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7 \
+            --platform linux/amd64 \
+            -t tfcenter/service:latest-amd64 \
             -t tfcenter/service:latest \
             -f Dockerfile.amd64 .
-          
+
+          # Build arm64
           docker buildx build --push \
             --platform linux/arm64 \
+            -t tfcenter/service:latest-arm64 \
             -t tfcenter/service:latest \
             -f Dockerfile.arm64 .
 
+          # Build 386
           docker buildx build --push \
             --platform linux/386 \
+            -t tfcenter/service:latest-386 \
             -t tfcenter/service:latest \
             -f Dockerfile.386 .
 
+          # Build arm/v7
           docker buildx build --push \
             --platform linux/arm/v7 \
+            -t tfcenter/service:latest-arm32 \
             -t tfcenter/service:latest \
             -f Dockerfile.arm32 .
 
