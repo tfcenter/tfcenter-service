@@ -10,12 +10,12 @@ COPY v3.3.5/tfcenter-linux-x86-v3.3.5.tar.gz /app/
 # 解压压缩包
 RUN tar -xzvf tfcenter-linux-x86-v3.3.5.tar.gz
 
-RUN mv tfcenter/tfcenter64 tfcenter/tfcenter
+RUN mv tfcenter/tfcenter32 tfcenter/tfcenter
 
 # 可选：清理工作目录，减少镜像大小
 RUN rm tfcenter-linux-x86-v3.3.5.tar.gz
 
-RUN rm tfcenter/tfcenter32
+RUN rm tfcenter/tfcenter64
 
 RUN rm tfcenter/tfcenter-daemon32
 

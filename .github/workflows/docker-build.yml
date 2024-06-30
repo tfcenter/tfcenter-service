@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        platform: [amd64, arm64]
+        platform: [amd64, arm64, 386, arm/v7]
 
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64,amd64
+          platforms: arm64,amd64,386,arm/v7
 
       - name: Set up Docker Buildx
         id: buildx
