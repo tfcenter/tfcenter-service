@@ -18,7 +18,7 @@ tfcenter是一款免费的内网穿透和文件管理软件，支持centos7/8、
 ## Docker容器安装
 ### linux 64位系统
   - （1）下载镜像： docker pull tfcenter:service
-  - （2）启动容器： docker run -it --name tfcenter --net=host --restart=always -v /home/tf-config:/tf-config  -d  docker.io/tfcenter/service:latest  /app/tfcenter-linux/tfcenter --config /tf-config
+  - （2）启动容器： docker run -it --name tfcenter --net=host --restart=always -v /home/tfcenter-config:/tfcenter-config  -d  docker.io/tfcenter/service:latest  /app/tfcenter/tfcenter --config /tfcenter-config
   - 使用 http://ip:8866 访问tfcenter页面
 
 
