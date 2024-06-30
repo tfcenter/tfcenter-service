@@ -9,14 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        platform:
-          - { arch: amd64, dockerfile: Dockerfile.amd64, tag: latest-amd64 }
-          - { arch: arm64, dockerfile: Dockerfile.arm64, tag: latest-arm64 }
-          - { arch: 386, dockerfile: Dockerfile.386, tag: latest-386 }
-          - { arch: arm/v7, dockerfile: Dockerfile.arm32, tag: latest-arm32 }
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,7 +16,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64,amd64,386,arm
+          platforms: arm64,amd64,386,arm/v7
 
       - name: Set up Docker Buildx
         id: buildx
@@ -36,14 +28,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: tfcenter/service:${{ matrix.platform.tag }}
-          file: ${{ matrix.platform.dockerfile }}
-          platforms: linux/${{ matrix.platform.arch }}
+      - name: Build and push Docker images for multiple architectures
+        run: |
+          docker buildx create --use
+          docker buildx build --platform linux/amd64 -t tfcenter/service:latest --push -f Dockerfile.amd64 .
+          docker buildx build --platform linux/arm64 -t tfcenter/service:latest --push -f Dockerfile.arm64 .
+          docker buildx build --platform linux/386 -t tfcenter/service:latest --push -f Dockerfile.386 .
+          docker buildx build --platform linux/arm/v7 -t tfcenter/service:latest --push -f Dockerfile.arm32 .
 
       - name: Logout from Docker Hub
         run: docker logout
