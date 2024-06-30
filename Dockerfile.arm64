@@ -17,9 +17,9 @@ RUN rm tfcenter-linux-arm-v3.3.5.tar.gz
 
 RUN rm tfcenter/tfcenter32
 
-RUN rm tfcenter/tfcenter32-daemon
+RUN rm tfcenter/tfcenter-daemon32
 
-RUN rm tfcenter/tfcenter64-daemon
+RUN rm tfcenter/tfcenter-daemon64
 
 
 # 定义容器启动时执行的命令
