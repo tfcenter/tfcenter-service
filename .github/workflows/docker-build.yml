@@ -12,10 +12,10 @@ jobs:
     strategy:
       matrix:
         platform:
-          - { arch: amd64, dockerfile: Dockerfile.amd64 }
-          - { arch: arm64, dockerfile: Dockerfile.arm64 }
-          - { arch: 386, dockerfile: Dockerfile.386 }
-          - { arch: arm/v7, dockerfile: Dockerfile.arm32 }
+          - { arch: amd64, dockerfile: Dockerfile.amd64, tag: latest-amd64 }
+          - { arch: arm64, dockerfile: Dockerfile.arm64, tag: latest-arm64 }
+          - { arch: 386, dockerfile: Dockerfile.386, tag: latest-386 }
+          - { arch: arm/v7, dockerfile: Dockerfile.arm32, tag: latest-arm32 }
 
     steps:
       - name: Checkout code
@@ -24,7 +24,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: arm64,amd64,386,arm
+          platforms: arm64,amd64,386,arm/v7
 
       - name: Set up Docker Buildx
         id: buildx
@@ -41,7 +41,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: tfcenter/service:latest
+          tags: tfcenter/service:${{ matrix.platform.tag }}
           file: ${{ matrix.platform.dockerfile }}
           platforms: linux/${{ matrix.platform.arch }}
 
