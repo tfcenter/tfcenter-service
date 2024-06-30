@@ -34,7 +34,7 @@ jobs:
           
           docker buildx build  --push \
            --platform linux/amd64,linux/386 \
-           -t tfcenter/service:latest . \
+           -t tfcenter/service:latest \
            -f Dockerfile.amd64 .
 
           # Build amd64
