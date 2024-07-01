@@ -9,22 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        platform:
-          - arch: amd64
-            dockerfile: Dockerfile.amd64
-            tag: latest-amd64
-          - arch: arm64
-            dockerfile: Dockerfile.arm64
-            tag: latest-arm64
-          - arch: 386
-            dockerfile: Dockerfile.386
-            tag: latest-386
-          - arch: arm/v7
-            dockerfile: Dockerfile.arm32
-            tag: latest-arm32
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -46,14 +30,11 @@ jobs:
 
       - name: Build and push multi-architecture Docker images
         run: |
-          # Create and use a new instance of Docker Buildx
           docker buildx create --use
-
-          # Build and push images for each platform
           docker buildx build --push \
             --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7 \
             -t tfcenter/service:latest \
-            -f ${{ matrix.platform.dockerfile }} .
+            -f Dockerfile.multi .
 
       - name: Logout from Docker Hub
         run: docker logout
