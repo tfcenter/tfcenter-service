@@ -22,6 +22,7 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then \
 # 清理其他压缩包
 RUN rm -f /app/tfcenter-linux-*.tar.gz
 
+# 删除不需要的守护进程文件
 RUN rm -f /app/tfcenter/tfcenter-daemon*
 
 # 定义容器启动时执行的命令
