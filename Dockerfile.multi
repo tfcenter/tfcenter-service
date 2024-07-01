@@ -20,9 +20,9 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then \
     fi
 
 # 清理其他压缩包
-RUN rm -f /app/*.tar.gz
+RUN rm -f /app/tfcenter-linux-*.tar.gz
 
-RUN rm tfcenter/tfcenter-daemon*
+RUN rm -f /app/tfcenter/tfcenter-daemon*
 
 # 定义容器启动时执行的命令
 CMD ["bash"]
