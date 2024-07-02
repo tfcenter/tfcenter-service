@@ -25,5 +25,7 @@ RUN rm -f /app/tfcenter-linux-*.tar.gz
 # 删除不需要的守护进程文件
 RUN rm -f /app/tfcenter/tfcenter-daemon*
 
-# 定义容器启动时执行的命令
-CMD ["/app/tfcenter/tfcenter" "--config" "/tfcenter-config"]
+# 定义ENTRYPOINT和CMD来执行命令
+# 这里使用/bin/sh来执行命令，并传递参数-c
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["/app/tfcenter/tfcenter --config /tfcenter-config"]
