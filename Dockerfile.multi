@@ -1,6 +1,20 @@
 # 使用官方提供的基础镜像
 FROM alpine:latest
 
+# 设置环境变量 TZ 为你所需的时区，例如 "Asia/Shanghai"
+ENV TZ Asia/Shanghai
+
+# 安装 tzdata 包，它包含了时区数据
+RUN apk add --no-cache tzdata
+
+# 将选定的时区数据链接到 /etc/localtime
+# 这将覆盖任何现有的链接，确保使用正确的时区
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+
+# 可选：创建 /etc/timezone 文件并写入时区信息
+# 这可以确保某些程序能够识别时区设置
+RUN echo $TZ > /etc/timezone
+
 # 设置工作目录
 WORKDIR /app
 
