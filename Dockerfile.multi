@@ -19,8 +19,8 @@ RUN echo $TZ > /etc/timezone
 WORKDIR /app
 
 # 将所有压缩包复制到容器中
-COPY v3.3.10/tfcenter-linux-x86-v3.3.10.tar.gz /app/tfcenter-linux-x86.tar.gz
-COPY v3.3.10/tfcenter-linux-arm-v3.3.10.tar.gz /app/tfcenter-linux-arm.tar.gz
+COPY v3.4.0/tfcenter-linux-x86-v3.4.0.tar.gz /app/tfcenter-linux-x86.tar.gz
+COPY v3.4.0/tfcenter-linux-arm-v3.4.0.tar.gz /app/tfcenter-linux-arm.tar.gz
 
 # 解压并删除不需要的压缩包
 RUN if [ "$(uname -m)" = "x86_64" ]; then \
