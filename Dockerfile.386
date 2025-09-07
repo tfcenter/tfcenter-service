@@ -5,15 +5,15 @@ FROM alpine:latest
 WORKDIR /app
 
 # 将压缩包复制到容器中
-COPY v3.4.1/tfcenter-linux-x86-v3.4.1.tar.gz /app/
+COPY v4.0.0/tfcenter-linux-x86-v4.0.0.tar.gz /app/
 
 # 解压压缩包
-RUN tar -xzvf tfcenter-linux-x86-v3.4.1.tar.gz
+RUN tar -xzvf tfcenter-linux-x86-v4.0.0.tar.gz
 
 RUN mv tfcenter/tfcenter32 tfcenter/tfcenter
 
 # 可选：清理工作目录，减少镜像大小
-RUN rm tfcenter-linux-x86-v3.4.1.tar.gz
+RUN rm tfcenter-linux-x86-v4.0.0.tar.gz
 
 RUN rm tfcenter/tfcenter64
 
